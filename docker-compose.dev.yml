@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./:/usr/src/app #Problem is it takes node modules as well
+      - /usr/src/app/node_modules #Path to the node modules in the container - this is more specific, so it will leave it alone and will not sync it
+    ports:
+      - 4000:4000
+    command: npm run dev #Overriding the Docker file that says to run npm run build.
